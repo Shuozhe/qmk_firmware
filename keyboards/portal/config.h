@@ -29,8 +29,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* key matrix size */
 // Rows are doubled-up
-#define MATRIX_ROWS 5
-#define MATRIX_COLS 6
+#define MATRIX_ROWS 10
+#define MATRIX_COLS 7
 
 /*
  * Keyboard Matrix Assignments
@@ -46,7 +46,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROW_PINS \
     { D4, C6, D7, E6, B4 }
 #define MATRIX_COL_PINS \
-    { B3, B1, F7, F6, F5, F4 }
+    { B2, B3, B1, F7, F6, F5, F4 }
+
 #define SPLIT_HAND_PIN D5
 #define UNUSED_PINS
 
@@ -56,7 +57,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /*
  * Split Keyboard specific options, make sure you have 'SPLIT_KEYBOARD = yes' in your rules.mk, and define SOFT_SERIAL_PIN.
  */
-#define SOFT_SERIAL_PIN D0  // or D1, D2, D3, E6
+#define SOFT_SERIAL_PIN D1  // or D1, D2, D3, E6
+#define MASTER_RIGHT
 
 // #define BACKLIGHT_PIN B7
 // #define BACKLIGHT_BREATHING
