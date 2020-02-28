@@ -45,9 +45,10 @@ HD44780_ENABLE = no         # Enable support for HD44780 based LCDs
 #SRC +=  ./glcdfont.c \
 #        ./lib/logo_reader.c \
 
-#TAP_DANCE_ENABLE = yes
-#OLED_DRIVER_ENABLE = yes
-#SPLIT_KEYBOARD = yes
-RAW_ENABLE = yes
+OLED_DRIVER_ENABLE = yes
 
-EXTRAFLAGS += -flto
+#TAP_DANCE_ENABLE = yes
+SPLIT_KEYBOARD = yes
+#RAW_ENABLE = yes
+
+EXTRAFLAGS += -flto # Reduce size of firmware by optimizing at link time

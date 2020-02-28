@@ -52,11 +52,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                     CCCV,      KC_6,    KC_7,   KC_8,    KC_9,    KC_0,     KC_EQUAL, \
                     KC_PLUS,   KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,     KC_MINS,  \
                     RANDOM,    KC_H,    KC_J,   KC_K,    KC_L,    KC_LBRC,  KC_RBRC,  \
-      L2(KC_SCLN),  KC_QUOT,   KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_TOP,   KC_SLSH,  \
-      KC_BSPC,      TT(3),     KC_BSPC,                  KC_LEFT, KC_DOWN, KC_RIGHT),
+      L2(KC_SCLN),  KC_QUOT,   KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_UP,    KC_SLSH,  \
+      KC_BSPC,      TT(3),     KC_BSPC,                  KC_LEFT, KC_DOWN,  KC_RIGHT),
 
     [_RAISE] = LAYOUT(
-      LA(KC_F12), KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, \
+      L0(KC_F12), KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, \
       KC_INS, KC_HOME, KC_UP, KC_END, _______, KC_PGUP, \
         _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, KC_PGDN, \
         _______, KC_PSCR, KC_SLCK, KC_PAUS, _______, _______, _______, \
@@ -65,12 +65,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                     CCCV,      KC_6,    KC_7,   KC_8,    KC_9,    KC_0,     KC_EQUAL, \
                     KC_PLUS,   KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,     KC_MINS,  \
                     RANDOM,    KC_H,    KC_J,   KC_K,    KC_L,    KC_LBRC,  KC_RBRC,  \
-      L2(KC_SCLN),  KC_QUOT,   KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_TOP,   KC_SLSH,  \
+      L2(KC_SCLN),  KC_QUOT,   KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_UP,   KC_SLSH,  \
       KC_BSPC,      TT(3),     KC_BSPC,                  KC_LEFT, KC_DOWN, KC_RIGHT),
 
     [_CALCULATOR] = LAYOUT(
-        LA(KC_KP_SLASH),  KC_KP_7, KC_KP_8,  KC_KP_9,   KC_KP_0,     KC_F5, \
-        KC_KP_ASTERIX, KC_KP_4, KC_KP_5,     KC_KP_6,   LSFT(KC_5),  KC_PGUP, \
+        L0(KC_KP_SLASH),  KC_KP_7, KC_KP_8,  KC_KP_9,   KC_KP_0,     KC_F5, \
+        KC_KP_ASTERISK, KC_KP_4, KC_KP_5,     KC_KP_6,   LSFT(KC_5),  KC_PGUP, \
         KC_KP_MINUS,   KC_KP_1, KC_KP_2,     KC_KP_3,   KC_KP_EQUAL, KC_PGDN, \
         KC_KP_PLUS,    KC_KP_0, KC_KP_COMMA, KC_KP_DOT, KC_KP_ENTER, _______, _______, \
                                                         KC_LGUI,     _______, _______, \
@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                     CCCV,      KC_6,    KC_7,   KC_8,    KC_9,    KC_0,     KC_EQUAL, \
                     KC_PLUS,   KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,     KC_MINS,  \
                     RANDOM,    KC_H,    KC_J,   KC_K,    KC_L,    KC_LBRC,  KC_RBRC,  \
-      L2(KC_SCLN),  KC_QUOT,   KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_TOP,   KC_SLSH,  \
+      L2(KC_SCLN),  KC_QUOT,   KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_UP,   KC_SLSH,  \
       KC_BSPC,      TT(3),     KC_BSPC,                  KC_LEFT, KC_DOWN, KC_RIGHT),
 
     [_COLEMAK] = LAYOUT(
@@ -150,6 +150,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record)
 
 
 #ifdef OLED_DRIVER_ENABLE
+oled_rotation_t oled_init_user(oled_rotation_t rotation)
+{
+    return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
+}
+
 static void render_logo(void)
 {
     static const char PROGMEM qmk_logo[] = { 0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x91, 0x92, 0x93, 0x94, 0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xAF, 0xB0, 0xB1, 0xB2, 0xB3, 0xB4, 0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7, 0xC8, 0xC9, 0xCA, 0xCB, 0xCC, 0xCD, 0xCE, 0xCF, 0xD0, 0xD1, 0xD2, 0xD3, 0xD4, 0x00 };
@@ -181,5 +186,5 @@ void oled_task_user(void)
     oled_write_P(led_state.num_lock ? PSTR("NUM ") : PSTR("    "), false);
     oled_write_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
     oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
-    }
+}
 #endif
