@@ -27,6 +27,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT portal
 #define DESCRIPTION A custom keyboard
 
+#define USE_I2C
+#define USE_SERIAL
+
 /* key matrix size */
 // Rows are doubled-up
 #define MATRIX_ROWS 10
@@ -34,6 +37,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAPPING_TERM 200
 
+ /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
+#define DEBOUNCE 5
 /*
  * Keyboard Matrix Assignments
  *
@@ -57,13 +62,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /*
  * Split Keyboard specific options, make sure you have 'SPLIT_KEYBOARD = yes' in your rules.mk, and define SOFT_SERIAL_PIN.
  */
-//#define EE_HANDS
-#define MASTER_RIGHT
+ //#define EE_HANDS
+//#define MASTER_RIGHT
 #define SOFT_SERIAL_PIN D3  // TX0 (left top)
 #define SERIAL_USE_MULTI_TRANSACTION
 
- /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
-#define DEBOUNCE 5
+
 
 /* define if matrix has ghost (lacks anti-ghosting diodes) */
 //#define MATRIX_HAS_GHOST

@@ -1,25 +1,8 @@
 # MCU name
 MCU = atmega32u4
-
-# Bootloader selection
-#   Teensy       halfkay
-#   Pro Micro    caterina
-#   Atmel DFU    atmel-dfu
-#   LUFA DFU     lufa-dfu
-#   QMK DFU      qmk-dfu
-#   ATmega32A    bootloadHID
-#   ATmega328P   USBasp
 BOOTLOADER = caterina
-
-# If you don't know the bootloader type, then you can specify the
-# Boot Section Size in *bytes* by uncommenting out the OPT_DEFS line
-# Otherwise, delete this section
-#   Teensy halfKay      512
-#   Teensy++ halfKay    1024
-#   Atmel DFU loader    4096
-#   LUFA bootloader     4096
-#   USBaspLoader        2048
-# OPT_DEFS += -DBOOTLOADER_SIZE=4096
+F_CPU = 16000000
+ARCH = AVR8
 
 # Build Options
 #   change yes to no to disable
@@ -41,14 +24,19 @@ AUDIO_ENABLE = no           # Audio output on port C6
 FAUXCLICKY_ENABLE = no      # Use buzzer to emulate clicky switches
 HD44780_ENABLE = no         # Enable support for HD44780 based LCDs
 
+SRC += i2c.c
+SRC += serial.c
+SRC += ssd1306.c
+SRC += split_util.c
+SRC += split_scomm.c
 # If you want to change the display of OLED, you need to change here
 #SRC +=  ./glcdfont.c \
 #        ./lib/logo_reader.c \
 
-OLED_DRIVER_ENABLE = yes
+#OLED_DRIVER_ENABLE = yes
 
 #TAP_DANCE_ENABLE = yes
-SPLIT_KEYBOARD = yes
-#RAW_ENABLE = yes
+#SPLIT_KEYBOARD = yes
+RAW_ENABLE = yes
 
-EXTRAFLAGS += -flto # Reduce size of firmware by optimizing at link time
+#EXTRAFLAGS += -flto # Reduce size of firmware by optimizing at link time

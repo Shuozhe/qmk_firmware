@@ -14,8 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-#include "ssd1306.h"
-#include <split_scomm.h>
+//#include "ssd1306.h"
+//#include <split_scomm.h>
 
 extern keymap_config_t keymap_config;
 

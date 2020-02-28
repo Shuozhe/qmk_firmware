@@ -9,9 +9,9 @@
 #include "keyboard.h"
 
 #ifdef USE_MATRIX_I2C
-#  include "i2c.h"
+#include "i2c.h"
 #else
-#  include "split_scomm.h"
+#include "split_scomm.h"
 #endif
 
 volatile bool isLeftHand = true;
