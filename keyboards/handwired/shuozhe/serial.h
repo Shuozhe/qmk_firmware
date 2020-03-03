@@ -1,30 +1,3 @@
-#pragma once
-
-#include <stdint.h>
-
-#ifndef F_CPU
-#define F_CPU 16000000UL
-#endif
-
-#define I2C_READ 1
-#define I2C_WRITE 0
-
-#define I2C_ACK 1
-#define I2C_NACK 0
-
-#define SLAVE_BUFFER_SIZE 0x10
-
-// i2c SCL clock frequency 400kHz
-#define SCL_CLOCK  400000L
-
-extern volatile uint8_t i2c_slave_buffer[SLAVE_BUFFER_SIZE];
-
-void i2c_master_init(void);
-uint8_t i2c_master_start(uint8_t address);
-void i2c_master_stop(void);
-uint8_t i2c_master_write(uint8_t data);
-uint8_t i2c_master_read(int);
-
 #ifndef SOFT_SERIAL_H
 #define SOFT_SERIAL_H
 
@@ -69,19 +42,19 @@ int serial_update_buffers(void);
 #endif // USE Simple API
 
 // Soft Serial Transaction Descriptor
-typedef struct _SSTD_t {
-    uint8_t* status;
+typedef struct _SSTD_t  {
+    uint8_t *status;
     uint8_t initiator2target_buffer_size;
-    uint8_t* initiator2target_buffer;
+    uint8_t *initiator2target_buffer;
     uint8_t target2initiator_buffer_size;
-    uint8_t* target2initiator_buffer;
+    uint8_t *target2initiator_buffer;
 } SSTD_t;
 #define TID_LIMIT( table ) (sizeof(table) / sizeof(SSTD_t))
 
 // initiator is transaction start side
-void soft_serial_initiator_init(SSTD_t* sstd_table, int sstd_table_size);
+void soft_serial_initiator_init(SSTD_t *sstd_table, int sstd_table_size);
 // target is interrupt accept side
-void soft_serial_target_init(SSTD_t* sstd_table, int sstd_table_size);
+void soft_serial_target_init(SSTD_t *sstd_table, int sstd_table_size);
 
 // initiator resullt
 #define TRANSACTION_END 0
@@ -109,26 +82,3 @@ int  soft_serial_get_and_clean_status(int sstd_index);
 #endif
 
 #endif /* SOFT_SERIAL_H */
-
-void i2c_reset_state(void);
-void i2c_slave_init(uint8_t address);
-
-
-static inline unsigned char i2c_start_read(unsigned char addr)
-{
-    return i2c_master_start((addr << 1) | I2C_READ);
-}
-
-static inline unsigned char i2c_start_write(unsigned char addr)
-{
-    return i2c_master_start((addr << 1) | I2C_WRITE);
-}
-
-// from SSD1306 scrips
-extern unsigned char i2c_rep_start(unsigned char addr);
-extern void i2c_start_wait(unsigned char addr);
-extern unsigned char i2c_readAck(void);
-extern unsigned char i2c_readNak(void);
-extern unsigned char i2c_read(unsigned char ack);
-
-#define i2c_read(ack)  (ack) ? i2c_readAck() : i2c_readNak();

@@ -28,14 +28,12 @@ void i2c_reset_state(void);
 void i2c_slave_init(uint8_t address);
 
 
-static inline unsigned char i2c_start_read(unsigned char addr)
-{
-    return i2c_master_start((addr << 1) | I2C_READ);
+static inline unsigned char i2c_start_read(unsigned char addr) {
+  return i2c_master_start((addr << 1) | I2C_READ);
 }
 
-static inline unsigned char i2c_start_write(unsigned char addr)
-{
-    return i2c_master_start((addr << 1) | I2C_WRITE);
+static inline unsigned char i2c_start_write(unsigned char addr) {
+  return i2c_master_start((addr << 1) | I2C_WRITE);
 }
 
 // from SSD1306 scrips
